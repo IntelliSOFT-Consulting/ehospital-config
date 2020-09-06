@@ -50,8 +50,8 @@
         "extensionPointId": "org.bahmni.registration.conceptSetGroup.observations",
         "type": "config",
         "extensionParams": {
-            "conceptName": "Fee Information",
-            "translationKey": "FEE_INFORMATION_LOCALE_KEY",
+            "conceptName": "Triage Form",
+            "translationKey": "Triage Information",
             "required":true
         },
         "order": 2,
