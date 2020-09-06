@@ -139,6 +139,16 @@
     "icon": "fa fa-calendar",
     "order": 14,
     "requiredPrivilege": "app:appointments"
-  }
+  },
+  "bahmniBilling": {
+    "id": "bahmni.billing",
+    "extensionPointId": "org.bahmni.home.dashboard",
+    "type": "link",
+    "label": "Prescription",
+    "url": "../clinical/#/default/patient/search",
+    "icon": "fa-inr",
+    "order": 15,
+    "requiredPrivilege": "app:billing"
+}
 
 }
