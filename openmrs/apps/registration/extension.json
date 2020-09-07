@@ -62,7 +62,7 @@
         "extensionPointId": "org.bahmni.registration.conceptSetGroup.observations",
         "type": "config",
         "extensionParams": {
-            "conceptName": "Fee Information",
+            "conceptName": "Mtiba Registration",
             "translationKey": "M-Tiba Registration",
             "required":true
         },
