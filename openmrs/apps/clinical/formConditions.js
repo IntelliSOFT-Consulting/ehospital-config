@@ -24,5 +24,17 @@ Bahmni.ConceptSet.FormConditions.rules = {
                 disable: ["Posture"]
             }
         }
-    }
+    },
+    "Screened for tuberculosis" : function (formName , formFieldValues, patient){
+        var screened = formFieldValues["Screened for tuberculosis"];
+        if(patient.age >= 5){
+            return{
+                show: ["Visual Acuity (RE/LE)","Nutrition Interventions"]
+            }
+        }else {
+            return{
+                hide: ["Visual Acuity (RE/LE)","Nutrition Interventions"]
+            }
+        }     
+    },
 };
