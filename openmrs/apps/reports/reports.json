@@ -1,4 +1,12 @@
 {
+    "MOH_705_A": {
+        "name": "MOH 705 A Outpatient summary < 5 years",
+        "type": "MRSGeneric",
+        "requiredPrivilege": "app:reports",
+        "config": {
+            "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_705_A.sql"
+        }
+    },
     "visitReport10": {
         "name": "Visit Report",
         "type": "visits",
