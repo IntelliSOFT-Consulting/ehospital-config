@@ -240,7 +240,8 @@ DROP TABLE IF EXISTS obs_temp;
     
  DROP TABLE IF EXISTS view_temp;
  CREATE TEMPORARY TABLE view_temp
- 
+ SELECT * FROM obs_temp;
+
  ALTER TABLE view_temp DROP COLUMN concept_id;
 
  SELECT * FROM view_temp ; 
