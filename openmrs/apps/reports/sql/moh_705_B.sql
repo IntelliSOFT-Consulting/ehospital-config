@@ -30,11 +30,11 @@ SELECT
 	SUM(CASE DAY(encounter_datetime) WHEN 28 THEN 1 ELSE 0 END) AS 28th,
 	SUM(CASE DAY(encounter_datetime) WHEN 29 THEN 1 ELSE 0 END) AS 29th,
 	SUM(CASE DAY(encounter_datetime) WHEN 30 THEN 1 ELSE 0 END) AS 30th,
-	SUM(CASE DAY(encounter_datetime) WHEN 31 THEN 1 ELSE 0 END) AS 31th,
+	SUM(CASE DAY(encounter_datetime) WHEN 31 THEN 1 ELSE 0 END) AS 31st,
 	SUM(CASE WHEN DAY(encounter_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 FROM openmrs.obs o 
 INNER JOIN openmrs.encounter e ON o.encounter_id = e.encounter_id
-INNER JOIN openmrs.concept_name c ON c.concept_id = o.value_coded AND locale = 'en' AND c.locale_preferred = 1
+RIGHT JOIN openmrs.concept_name c ON c.concept_id = o.value_coded AND locale = 'en' AND c.locale_preferred = 1
 INNER JOIN openmrs.person p ON p.person_id = o.person_id 
 WHERE 
    encounter_datetime BETWEEN '#startDate#' AND '#endDate#'
