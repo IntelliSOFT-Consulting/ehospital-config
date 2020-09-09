@@ -33,16 +33,13 @@ SELECT
 	SUM(CASE DAY(encounter_datetime) WHEN 31 THEN 1 ELSE 0 END) AS 31st,
 	SUM(CASE WHEN DAY(encounter_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON o.concept_id = c.concept_id 
-LEFT JOIN openmrs.encounter e ON o.encounter_id = e.encounter_id
-LEFT JOIN openmrs.person p ON p.person_id = o.person_id 
+LEFT JOIN openmrs.obs o ON c.concept_id = o.value_coded 
+LEFT JOIN openmrs.encounter e ON o.encounter_id = e.encounter_id AND encounter_datetime BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') >= 5
 WHERE 
-   c.concept_id = o.value_coded AND locale = 'en' AND c.locale_preferred = 1
-   AND encounter_datetime BETWEEN '#startDate#' AND '#endDate#'
-   AND value_coded IS NOT NULL
+   locale = 'en' AND c.locale_preferred = 1
    /*add all the concept ids for diagnoses here*/
-   AND o.concept_id IN (1, 1) 
-   AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') > 5
+   AND c.concept_id IN (1, 1) 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
