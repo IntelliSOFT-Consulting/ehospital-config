@@ -66,7 +66,6 @@ INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
 
 UNION ALL	
 
-/* this is a subcategory. check from multiple concepts */
 SELECT '2.6 Potassium' AS 'Blood Sugar Test' ,
    SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'Low' ,
@@ -213,7 +212,6 @@ INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
 	
 UNION ALL	
-
 
 SELECT '2.19 LDL' AS 'Blood Sugar Test' ,
    SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,

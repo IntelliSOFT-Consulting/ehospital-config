@@ -21,19 +21,40 @@
 		"config": {
 		"reports": [
 				{
-					"name": "MOH 706 URINE ANALYSIS",
+					"name": "1 URINE ANALYSIS",
 					"type": "MRSGeneric",
 					"config": {
 						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_706_urineAnalysis.sql"
 					}
 				},
 				{
-					"name": "MOH 706  BLOOD CHEMISTRY",
+					"name": "2 BLOOD CHEMISTRY",
 					"type": "MRSGeneric",
 					"config": {
 						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_706_bloodChemistry.sql"
 					}
-				}				
+                },
+				{
+					"name": "3 PARASITOLOGY",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_706_parasitology.sql"
+					}
+				},
+				{
+					"name": "4 HAEMATOLOGY",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_706_haematology.sql"
+					}
+				},
+				{
+					"name": "5 BACTERIOLOGY",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_706_bacteriology.sql"
+					}
+				}						
 			]
 		}
 	},
