@@ -8,7 +8,7 @@
         }
     },
     "MOH_705_B": {
-        "name": "MOH 705 B Outpatient summary < 5 years",
+        "name": "MOH 705 B Outpatient summary > 5 years",
         "type": "MRSGeneric",
         "requiredPrivilege": "app:reports",
         "config": {
