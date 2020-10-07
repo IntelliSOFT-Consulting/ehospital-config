@@ -4,7 +4,7 @@ SELECT '4.1 Full blood count' AS 'Haematology Test' ,
 	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='FULL BLOOD COUNT (HAEMOGRAM)'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
    	
 
@@ -65,12 +65,12 @@ SELECT 'Other Haematology Test' AS 'Haematology Test' ,
 UNION ALL	
 	
 SELECT '4.5 Sickling test' AS 'Haematology Test' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'HB <5 g/dl' ,
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'HB <5 g/dl' ,
 	''  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Sickling test'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
    
 UNION ALL	
@@ -109,12 +109,12 @@ INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
 UNION ALL	
 	
 SELECT '4.9 Reticulocyte Count' AS 'Haematology Test' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
    '' AS 'HB <5 g/dl' ,
 	''  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Reticulocyte Count'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	 
    
 UNION ALL

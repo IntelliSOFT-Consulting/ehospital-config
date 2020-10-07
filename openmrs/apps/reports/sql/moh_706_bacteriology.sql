@@ -59,7 +59,14 @@ SELECT '5.6 Blood' AS 'Bacteriological Sample' ,
 	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'No. Culture Positive'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name IN ('Absolute Eosinphil Count','Haemoglobin', 'Eosinophil (Blood)', 
+	'Lymphocyte (Blood)', 'Packed Cell Volume (PCV)', 'Platelet Count', 
+	'Basophil (Blood)', 'Total Leucocyte Count',  'APTT (Test) (Blood)', 
+	'ESR','Neutrophil', 'Monocyte (Blood)', 'INR Ratio (Blood)', 
+	'Prothrombin Time (Control) (Blood)','Haemoglobin (Relative)',  
+	 'Eosinophil, Lymphocyte', 'Polymorph', 'Fasting Blood Sugar', 
+	 'Post Blood Sugar (30 mins)',  'Post Blood Sugar (60 mins)', 
+	 'Post Blood Sugar (90 mins)','Post Blood Sugar (120 mins)')
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'   
 
 UNION ALL
