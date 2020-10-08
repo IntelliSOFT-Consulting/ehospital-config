@@ -54,7 +54,35 @@
 					"config": {
 						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_706_bacteriology.sql"
 					}
-				}						
+				},
+				{
+					"name": "6. HISTOLOGY AND CYTOLOGY",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_706_histology.sql"
+					}
+                },
+                {
+					"name": "7. SEROLOGY",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_706_serology.sql"
+					}
+				},
+                {
+					"name": "8. SPECIMEN REFERRAL TO HIGHER LEVELS",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_706_specimenReferral.sql"
+					}
+				},
+                {
+					"name": "9. Drug Susceptibility Testing",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_706_DrugSusceptibility.sql"
+					}
+				}										
 			]
 		}
 	},
