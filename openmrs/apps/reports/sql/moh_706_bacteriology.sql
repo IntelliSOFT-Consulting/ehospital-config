@@ -117,7 +117,7 @@ SELECT '5.10 Stool Cultures' AS 'Bacteriological Sample' ,
 	''  AS 'No. Culture Positive'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Culture (Stool)'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#' 
 	
 UNION ALL
