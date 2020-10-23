@@ -1,54 +1,54 @@
 SELECT '5.1 Urine' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'Total Cultures' ,
-	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'No. Culture Positive'         
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric  = 1 THEN 1  END) AS 'Total Cultures' ,
+	SUM(CASE WHEN o.value_numeric =1 THEN 1 END)  AS 'No. Culture Positive'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Urine'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
    
 UNION ALL
 
 SELECT '5.2 Pus swabs' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'Total Cultures' ,
-	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'No. Culture Positive'         
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'Total Cultures' ,
+	SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'No. Culture Positive'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Pus swabs'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
    
 UNION ALL
 
 SELECT '5.3 High Vaginal Swabs' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'Total Cultures' ,
-	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'No. Culture Positive'         
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'Total Cultures' ,
+	SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'No. Culture Positive'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='High Vaginal Swabs'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'   
    
 UNION ALL
 
 SELECT '5.4 Throat swab' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'Total Cultures' ,
-	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'No. Culture Positive'         
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'Total Cultures' ,
+	SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'No. Culture Positive'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Throat swab'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#' 
 	     
 UNION ALL
 
 SELECT '5.5 Rectal swab' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'Total Cultures' ,
-	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'No. Culture Positive'         
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'Total Cultures' ,
+	SUM(CASE WHEN o.value_numeric = 1 THEN 1 END) AS 'No. Culture Positive'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Rectal swab'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'  
 
 UNION ALL
@@ -72,34 +72,34 @@ INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
 UNION ALL
 	
 SELECT '5.7 Water' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'Total Cultures' ,
-	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'No. Culture Positive'         
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'Total Cultures' ,
+	SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'No. Culture Positive'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Water'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'  	 
    
 UNION ALL
 	
 SELECT '5.8 Food' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'Total Cultures' ,
-	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'No. Culture Positive'         
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'Total Cultures' ,
+	SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'No. Culture Positive'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Food'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
 	
 UNION ALL
 	
 SELECT '5.9 Urethral swabs' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'Total Cultures' ,
-	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'No. Culture Positive'         
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'Total Cultures' ,
+	SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'No. Culture Positive'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Urethral swabs'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'  
 	
 UNION ALL
@@ -130,56 +130,56 @@ SELECT 'Stool Isolates' AS 'Bacteriological Sample' ,
 UNION ALL
 	
 SELECT '5.11 Salmonella typie' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Salmonella typhi'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'  
 	
 UNION ALL
 	
 SELECT '5.12 Shigella - dysenteriae type1' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Shigella - dysenteriae type1'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'  
 	
 UNION ALL
 	
 SELECT '5.13 E. coli O 157:H7' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric =1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='E. coli O 157:H7'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#' 
 	
 UNION ALL
 	
 SELECT '5.14 V. cholerae O1' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='V. cholerae O1'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#' 
 	
 UNION ALL
 	
 SELECT '5.15 V. cholerae O139' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='V. cholerae O139'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#' 
 	
 UNION ALL
@@ -193,11 +193,11 @@ UNION ALL
 
 SELECT '5.16 CSF' AS 'Bacteriological Sample' ,
    SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'Total Cultures' ,
-	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'No. Culture Positive'         
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'Total Cultures' ,
+	SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'No. Culture Positive'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='CSF'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
 	
 	
@@ -211,111 +211,111 @@ SELECT 'Bacterial meningitis Serotypes' AS 'Bacteriological Sample' ,
 UNION ALL
 	
 SELECT '5.17 Neisseria meningitidis A' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Neisseria meningitidis A'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL
 	
 SELECT '5.18 Neisseria meningitidis B' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Neisseria meningitidis B'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL
 	
 SELECT '5.19 Neisseria meningitidis C' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Neisseria meningitidis C'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL
 	
 SELECT '5.20 Neisseria meningitidis W135' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Neisseria meningitidis W135'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL
 	
 SELECT '5.21 Neisseria meningitidis X' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Neisseria meningitidis X'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 
 UNION ALL
 	
 SELECT '5.22 Neisseria meningitidis Y' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Neisseria meningitidis Y'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL
 	
 SELECT '5.23 N.meningitidis (indeterminate)' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='N.meningitidis (indeterminate)'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL
 	
 SELECT '5.24 Streptococcus pneumonia' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Streptococcus pneumoniae'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL
 	
 SELECT '5.25 Haemophilus influenzae (type b)' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric= 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Haemophilus influenzae (type b)'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL
 	
 SELECT '5.26 Cryptococcal Meningitis' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Cryptococcal Meningitis'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL
@@ -328,23 +328,23 @@ SELECT 'Bacterial Pathogens from other types of specimen' AS 'Bacteriological Sa
 UNION ALL
 	
 SELECT '5.27 B. anthracis' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='B. anthracis'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL
 	
 SELECT '5.28 Y. pestis' AS 'Bacteriological Sample' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)   ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)   ,
    ''  ,
 	''           
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Y. pestis'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL

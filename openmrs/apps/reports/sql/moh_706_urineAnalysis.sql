@@ -62,10 +62,10 @@ UNION ALL
 
 SELECT '1.7 S. haematobiums' AS 'Urine Test' ,
    '' AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_text IS NOT NULL THEN 1 END)  AS 'Number Postive'       
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END)  AS 'Number Postive'       
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'concept_name'
+   AND c.name = 'S. haematobium'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
 	
 UNION ALL
@@ -95,7 +95,5 @@ SELECT '1.10 Bacteria' AS 'Urine Test' ,
    SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'Number Postive'       
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'concept_name'
+   AND c.name = 'Bacteria'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'  ;
-	
-	

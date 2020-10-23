@@ -12,11 +12,11 @@ UNION ALL
 	
 SELECT '4.2 HB estimation tests (other techniques)' AS 'Haematology Test' ,
    SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'HB <5 g/dl' ,
-	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'HB between 5 and 10 g/dl'         
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'HB <5 g/dl' ,
+	SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='HB estimation tests (other techniques)'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
    
 UNION ALL
@@ -30,11 +30,11 @@ UNION ALL
 	
 SELECT '4.3 Hemoglobin A1c (HbA1c)' AS 'Haematology Test' ,
    SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'HB <5 g/dl' ,
-	SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'HB between 5 and 10 g/dl'         
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'HB <5 g/dl' ,
+	SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Hemoglobin A1c (HbA1c)'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
    
 UNION ALL
@@ -52,7 +52,7 @@ SELECT '4.4 CD4 count' AS 'Haematology Test' ,
 	''  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='CD4 count'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL
@@ -76,34 +76,34 @@ INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
 UNION ALL	
 	
 SELECT '4.6 Peripheral blood films' AS 'Haematology Test' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
    '' AS 'HB <5 g/dl' ,
 	''  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Peripheral blood films'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
    
 UNION ALL	
 	
 SELECT '4.7 BMA' AS 'Haematology Test' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
    '' AS 'HB <5 g/dl' ,
 	''  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='BMA'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	 
    
 UNION ALL	
 	
 SELECT '4.8 Coagulation profile' AS 'Haematology Test' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
    '' AS 'HB <5 g/dl' ,
 	''  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Coagulation profile'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
 	
 UNION ALL	
@@ -128,11 +128,11 @@ UNION ALL
 	
 SELECT '4.10 Erythrocyte Sedimentation rate' AS 'Haematology Test' ,
    SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END) AS 'HB <5 g/dl' ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END) AS 'HB <5 g/dl' ,
 	''  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Erythrocyte Sedimentation rate'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	 		
 	 		    
 UNION ALL
@@ -254,45 +254,45 @@ SELECT 'Blood Screening at facility' AS 'Haematology Test' ,
 UNION ALL	
 	
 SELECT '4.19 HIV' AS 'Haematology Test' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'HB <5 g/dl' ,
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'HB <5 g/dl' ,
 	''  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='HIV'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL	
 	
 SELECT '4.20 Hepatitis B' AS 'Haematology Test' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'HB <5 g/dl' ,
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'HB <5 g/dl' ,
 	''  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Hepatitis B'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL	
 	
 SELECT '4.21 Hepatitis C' AS 'Haematology Test' ,
-   SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'HB <5 g/dl' ,
+   SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
+   SUM(CASE WHEN o.value_numeric THEN 1 END)  AS 'HB <5 g/dl' ,
 	''  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Hepatitis C'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL	
 	
 SELECT '4.22 Syphillis' AS 'Haematology Test' ,
    SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END ) AS 'Total Exam' ,
-   SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'OTHER NON-CODED' AND c.locale = 'en') THEN 1 END)  AS 'HB <5 g/dl' ,
+   SUM(CASE WHEN o.value_numeric = 1 THEN 1 END)  AS 'HB <5 g/dl' ,
 	''  AS 'HB between 5 and 10 g/dl'         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='Civil status'
+   AND c.name ='Syphillis'
    AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'																      
  															      
  

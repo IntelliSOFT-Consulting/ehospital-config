@@ -312,7 +312,7 @@ SELECT '2.25 CA 19-9' AS 'Blood Sugar Test' ,
 	' '  AS ' '         
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name ='concept_name'
+   AND c.name ='CA 19-9'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
 	
 UNION ALL	

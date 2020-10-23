@@ -27,7 +27,7 @@ SELECT '9.1 E. coli 0157:H7' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'E. coli 0157:H7'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
 	
 UNION ALL 	
@@ -61,7 +61,7 @@ SELECT '9.2 Proteus spp' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Proteus spp'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
 	
 	
@@ -96,7 +96,7 @@ SELECT '9.3 Salmonella spp' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Salmonella spp'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL 	
@@ -130,7 +130,7 @@ SELECT '9.4 Shigella spp' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Shigella spp'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL 	
@@ -164,7 +164,7 @@ SELECT '9.5 Klebsiella pneumoniae' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Klebsiella pneumoniae'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL 	
@@ -198,7 +198,7 @@ SELECT '9.6 Pseudomonas spp' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Pseudomonas spp'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL 	
@@ -232,7 +232,7 @@ SELECT '9.7 Staphylococcus aureus' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Staphylococcus aureus'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL 	
@@ -266,7 +266,7 @@ SELECT '9.8 Vibrio cholerae spp' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Vibrio cholerae spp'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL 	
@@ -300,7 +300,7 @@ SELECT '9.9 Neisseria meningitidis' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Neisseria meningitidis'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL 	
@@ -334,7 +334,7 @@ SELECT '9.10 Neisseria gonorrhoeae' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Neisseria gonorrhoeae'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL 	
@@ -368,7 +368,7 @@ SELECT '9.11 Streptococcus pneumoniae' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Streptococcus pneumoniae'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL 	
@@ -402,7 +402,7 @@ SELECT '9.12 Haemophilus influenzae' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Haemophilus influenzae'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'		
 	
 UNION ALL 	
@@ -436,7 +436,7 @@ SELECT '9.13 Haemophilus parainfluenzae' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Haemophilus parainfluenzae'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	
 	
 UNION ALL 	
@@ -470,5 +470,5 @@ SELECT '9.14 Bacterial vaginosis' AS 'Drug Resistance Pattern' ,
 	 SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'CODED VALUE' AND c.locale = 'en')  THEN 1 END)  AS 'aa. Gentamicin'
 FROM openmrs.obs o 
 INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id 
-   AND c.name = 'CONCEPT_NAME'
+   AND c.name = 'Bacterial vaginosis'
 	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'	 ;									
