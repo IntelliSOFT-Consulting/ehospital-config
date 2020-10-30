@@ -85,7 +85,22 @@
 				}										
 			]
 		}
-	},
+    },
+    "MOH_710_Immunisation": {
+		"name": "MOH 710 Imminusation Summary",
+		"type": "concatenated",
+		"config": {
+		"reports": [
+				{
+					"name": "SECTION A IMMUNISATION SUMMARY",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_710_sectionA_vaccines.sql"
+					}
+				}										
+			]
+		}
+	} ,
     "visitReport10": {
         "name": "Visit Report",
         "type": "visits",
