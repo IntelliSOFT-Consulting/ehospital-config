@@ -41,8 +41,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'BCG, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
@@ -92,8 +92,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'BCG, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
@@ -143,8 +143,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(WEEK, p.birthdate, o.value_datetime) <= 2
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Polio birth Dose, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
@@ -194,8 +194,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = '1st Polio, Date'
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
@@ -246,8 +246,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = '1st Polio, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0   
@@ -297,8 +297,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = '2nd Polio, Date'
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0 
@@ -348,8 +348,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = '2nd Polio, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0    
@@ -399,8 +399,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = '3rd Polio, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0 
@@ -450,8 +450,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = '3rd Polio, Date'  
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0   
@@ -501,8 +501,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'IPV, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0 
@@ -552,8 +552,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name  = 'IPV, Date 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0    
@@ -603,8 +603,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'DPT/Hep.B/ Hib.1, Date'
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
@@ -654,8 +654,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'DPT/Hep.B/ Hib.1, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0		 
@@ -705,8 +705,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'DPT/Hep.B/ Hib.2, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
@@ -756,8 +756,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name  = 'DPT/Hep.B/ Hib.2, Date'  
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0		 
@@ -807,8 +807,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name  = 'DPT/Hep.B/ Hib.3, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
@@ -858,8 +858,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'DPT/Hep.B/ Hib.3, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0		 
@@ -909,8 +909,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Pneumococcal 1, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
@@ -960,8 +960,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Pneumococcal 1, Date'  
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0	
@@ -1011,8 +1011,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Pneumococcal 2, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
@@ -1062,8 +1062,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Pneumococcal 2, Date'  
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0	
@@ -1113,8 +1113,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Pneumococcal 3, Date'  
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
@@ -1164,8 +1164,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Pneumococcal 3, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0				 
@@ -1215,8 +1215,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Rota1, Date'
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0	  
@@ -1266,8 +1266,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Rota2, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0	  
@@ -1318,8 +1318,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) BETWEEN 6 AND 11
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Vitamin A (6-11 months), Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0	  	
@@ -1369,8 +1369,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Yellow Fever, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
@@ -1420,8 +1420,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Yellow Fever, Date'
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0		
@@ -1471,8 +1471,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'MR1, Date'
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0
@@ -1522,8 +1522,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name  = 'MR1, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0	
@@ -1573,8 +1573,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) = 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'Fully Immunised, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0						 
@@ -1624,7 +1624,7 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) BETWEEN 12 AND 59
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
+  
    AND c.name IN ('concept_name') 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
@@ -1675,8 +1675,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) BETWEEN 18 AND 24
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'MR 2, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0		
@@ -1726,8 +1726,8 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 24
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
-   AND c.name IN ('concept_name') 
+  
+   AND c.name = 'MR 2, Date' 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
    AND TIMESTAMPDIFF(MONTH, '#startDate#', '#endDate#') = 0	
@@ -1776,7 +1776,7 @@ FROM openmrs.concept_name c
 LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
+  
    AND c.name IN ('concept_name') 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
@@ -1826,7 +1826,7 @@ FROM openmrs.concept_name c
 LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
+  
    AND c.name IN ('concept_name') 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
@@ -1876,7 +1876,7 @@ FROM openmrs.concept_name c
 LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
+  
    AND c.name IN ('concept_name') 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
@@ -1926,7 +1926,7 @@ FROM openmrs.concept_name c
 LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
+  
    AND c.name IN ('concept_name') 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
@@ -1976,7 +1976,7 @@ FROM openmrs.concept_name c
 LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
+  
    AND c.name IN ('concept_name') 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
@@ -2026,7 +2026,7 @@ FROM openmrs.concept_name c
 LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
+  
    AND c.name IN ('concept_name') 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
@@ -2076,7 +2076,7 @@ FROM openmrs.concept_name c
 LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
+  
    AND c.name IN ('concept_name') 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
@@ -2126,7 +2126,7 @@ FROM openmrs.concept_name c
 LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
+  
    AND c.name IN ('concept_name') 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
@@ -2177,7 +2177,7 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
+  
    AND c.name IN ('concept_name') 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
@@ -2227,7 +2227,7 @@ FROM openmrs.concept_name c
 LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
+  
    AND c.name IN ('concept_name') 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
@@ -2278,7 +2278,7 @@ LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BET
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) > 6
 WHERE 
    locale = 'en' AND c.locale_preferred = 1
-   /*add all the concept names for diagnoses here*/
+  
    AND c.name IN ('concept_name') 
    AND EXTRACT(DAY FROM '#startDate#') = 1 
    AND LAST_DAY('#startDate#') = '#endDate#'
