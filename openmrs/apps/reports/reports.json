@@ -88,6 +88,28 @@
                 } 										
 			]
 		}
+    } ,
+    "MOH740DMandHTM": {
+		"name": "MONTHLY SUMMARY FORM - MOH 740",
+		"type": "concatenated",
+		"config": {
+		"reports": [
+				{
+					"name": "MONTHLY SUMMARY FORM",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_740.sql"
+					}
+                } ,
+                {
+					"name": "MONTHLY SUMMARY FORM DISAGGREGATED",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_740_disaggregated.sql"
+					}
+                } 										
+			]
+		}
 	} ,
     "visitReport10": {
         "name": "Visit Report",
