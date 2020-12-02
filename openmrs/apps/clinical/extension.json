@@ -90,7 +90,7 @@
       "forwardUrl": "#/default/patient/{{patientUuid}}/dashboard"
     },
     "label": "Active",
-    "order": 2,
+    "order": 3,
     "requiredPrivilege": "app:clinical"
   },
   "bahmniClinicalPatientsSearchOPDActivePatientsByProvider": {
@@ -103,7 +103,7 @@
       "forwardUrl": "#/default/patient/{{patientUuid}}/consultationContext"
     },
     "label": "OPD-1",
-    "order": 3,
+    "order": 4,
     "requiredPrivilege": "app:clinical"
   },
   "activePatientsByLocation": {
@@ -116,20 +116,33 @@
       "forwardUrl": "#/default/patient/{{patientUuid}}/dashboard"
     },
     "label": "Active",
-    "order": 4,
+    "order": 5,
     "requiredPrivilege": "app:clinical"
   },
-  "bahmniClinicalPatientsSearchTriage": {
-    "id": "bahmni.clinical.patients.search.Resuscitation",
+  "bahmniClinicalPatientsSearchVitalsNotTaken": {
+    "id": "bahmni.clinical.patients.search.vitalsNotTaken",
     "extensionPointId": "org.bahmni.patient.search",
     "type": "config",
     "extensionParams": {
-      "searchHandler": "emrapi.sqlSearch.Triage",
-      "translationKey": "MODULE_LABEL_TRIAGE_KEY",
+      "searchHandler": "emrapi.sqlSearch.VitalsNotTaken",
+      "translationKey": "MODULE_LABEL_VITALS_NOT_KEY",
       "forwardUrl": "#/default/patient/{{patientUuid}}/dashboard"
     },
     "label": "Active",
     "order": 1,
+    "requiredPrivilege": "app:clinical"
+  },
+  "bahmniClinicalPatientsSearchVitalsTaken": {
+    "id": "bahmni.clinical.patients.search.vitalsTaken",
+    "extensionPointId": "org.bahmni.patient.search",
+    "type": "config",
+    "extensionParams": {
+      "searchHandler": "emrapi.sqlSearch.VitalsTaken",
+      "translationKey": "MODULE_LABEL_VITALS_TAKEN_KEY",
+      "forwardUrl": "#/default/patient/{{patientUuid}}/dashboard"
+    },
+    "label": "Active",
+    "order": 2,
     "requiredPrivilege": "app:clinical"
   },
   "bahmniClinicalPatientsSearchAllPatients": {
