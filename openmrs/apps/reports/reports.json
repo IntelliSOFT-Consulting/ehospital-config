@@ -124,12 +124,89 @@
 					}
                 } ,
                 {
-					"name": "PageSummary",
+					"name": "PageSummary Diabetes ,Hypertension",
 					"type": "MRSGeneric",
 					"config": {
-						"sqlPath": ""
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary.sql"
 					}
-                } 										
+                } ,
+                {
+					"name": "PageSummary Co-morbid DM+ HTN",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_DM_HTN.sql"
+					}
+                } ,
+                {
+					"name": "PageSummary BMI",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_Bmi.sql"
+					}
+                } ,
+                {
+					"name": "PageSummary Diagnosis DM /HTM",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_diagnosis.sql"
+					}
+                },
+                {
+					"name": "PageSummary Diabetes Types",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_diabetesType.sql"
+					}
+                } ,
+                {
+					"name": "PageSummary New Complications",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_complications.sql"
+					}
+                } ,
+                {
+					"name": "PageSummary Treatment",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_treatment.sql"
+					}
+                } ,
+                {
+					"name": "PageSummary TB",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_tb.sql"
+					}
+                } ,
+                {
+					"name": "PageSummary Vists",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_vists.sql"
+					}
+                } 	,
+                {
+					"name": "PageSummary BP Reading",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_Bp.sql"
+					}
+                }  ,
+                {
+					"name": "PageSummary Waist Circumference",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_waist.sql"
+					}
+                },
+                {
+					"name": "PageSummary Diabetic Foot",
+					"type": "MRSGeneric",
+					"config": {
+						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_DiabeticFoot.sql"
+					}
+                } 															
 			]
 		}
 	} ,
