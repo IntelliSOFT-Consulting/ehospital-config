@@ -179,6 +179,50 @@
     "order": 2,
     "requiredPrivilege": "app:clinical"
   },
+  "bahmniClinicalConceptSetGroupObservationsForm204": {
+    "id": "bahmni.clinical.conceptSetGroup.observations.form204",
+    "extensionPointId": "org.bahmni.clinical.conceptSetGroup.observations",
+    "type": "config",
+    "extensionParams": {
+      "default": true,
+      "conceptName": "Form 204"
+    },
+    "order": 3,
+    "requiredPrivilege": "app:clinical"
+  },
+  "bahmniClinicalConceptSetGroupObservationsDailyRegister": {
+    "id": "bahmni.clinical.conceptSetGroup.observations.dailyRegister",
+    "extensionPointId": "org.bahmni.clinical.conceptSetGroup.observations",
+    "type": "config",
+    "extensionParams": {
+      "default": true,
+      "conceptName": "MOH 222 Daily Register"
+    },
+    "order": 4,
+    "requiredPrivilege": "app:clinical"
+  },	
+  "bahmniClinicalConceptSetGroupObservationsParmanentRegister": {
+    "id": "bahmni.clinical.conceptSetGroup.observations.parmanentRegister",
+    "extensionPointId": "org.bahmni.clinical.conceptSetGroup.observations",
+    "type": "config",
+    "extensionParams": {
+      "default": true,
+      "conceptName": "MOH 270 Permanent Register"
+    },
+    "order": 5,
+    "requiredPrivilege": "app:clinical"
+  },
+  "bahmniClinicalConceptSetGroupObservationsImmunizationForm": {
+    "id": "bahmni.clinical.conceptSetGroup.observations.immunizationForm",
+    "extensionPointId": "org.bahmni.clinical.conceptSetGroup.observations",
+    "type": "config",
+    "extensionParams": {
+      "default": true,
+      "conceptName": "Immunization Form"
+    },
+    "order": 6,
+    "requiredPrivilege": "app:clinical"
+  },
   "bahmniClinicalConceptSetGroupObservationsSecondVitals": {
     "id": "bahmni.clinical.conceptSetGroup.observations.secondVitals",
     "extensionPointId": "org.bahmni.clinical.conceptSetGroup.observations",
