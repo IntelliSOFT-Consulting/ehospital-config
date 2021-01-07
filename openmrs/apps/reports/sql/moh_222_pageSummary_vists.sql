@@ -1,5 +1,5 @@
 
-SELECT 'First Vist' AS '' ,
+SELECT 'First Visit' AS 'Visits' ,
    SUM(CASE WHEN p.gender = 'M'  THEN 1 END ) AS 'Male' ,
    SUM(CASE WHEN  p.gender = 'F'  THEN 1 END ) AS 'FeMale'  
 FROM openmrs.obs o 
@@ -12,7 +12,7 @@ WHERE c.locale = 'en'
    
    UNION ALL 
   
- SELECT 'ReVists' AS '' ,
+ SELECT 'ReVisits' AS 'ReVisits' ,
    SUM(CASE WHEN p.gender = 'M'  THEN 1 END ) AS 'Male' ,
    SUM(CASE WHEN  p.gender = 'F'  THEN 1 END ) AS 'FeMale'  
 FROM openmrs.obs o 

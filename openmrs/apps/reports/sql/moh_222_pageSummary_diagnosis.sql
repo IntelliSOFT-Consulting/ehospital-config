@@ -1,5 +1,5 @@
 
-SELECT 'Newly diagnosed DM' AS '' ,
+SELECT 'Newly diagnosed DM' AS 'Newly diagnosed' ,
    SUM(CASE WHEN p.gender = 'M'  THEN 1 END ) AS 'Male' ,
    SUM(CASE WHEN  p.gender = 'F'  THEN 1 END ) AS 'FeMale'  
 FROM openmrs.obs o 
