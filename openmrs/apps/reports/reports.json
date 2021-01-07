@@ -112,7 +112,7 @@
 		}
     } ,
     "MOH222DailyRegister": {
-		"name": "MONTHLY SUMMARY FORM - MOH 740",
+		"name": "MONTHLY SUMMARY FORM - MOH 222",
 		"type": "concatenated",
 		"config": {
 		"reports": [
