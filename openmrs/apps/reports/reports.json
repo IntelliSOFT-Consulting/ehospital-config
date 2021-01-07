@@ -116,13 +116,6 @@
 		"type": "concatenated",
 		"config": {
 		"reports": [
-				{
-					"name": "Diabetes & Hypertension Comprehensive Care",
-					"type": "MRSGeneric",
-					"config": {
-						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_diabetes_care.sql"
-					}
-                } ,
                 {
 					"name": "PageSummary Diabetes ,Hypertension",
 					"type": "MRSGeneric",
@@ -151,27 +144,6 @@
 						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_diagnosis.sql"
 					}
                 },
-                {
-					"name": "PageSummary Diabetes Types",
-					"type": "MRSGeneric",
-					"config": {
-						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_diabetesType.sql"
-					}
-                } ,
-                {
-					"name": "PageSummary New Complications",
-					"type": "MRSGeneric",
-					"config": {
-						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_complications.sql"
-					}
-                } ,
-                {
-					"name": "PageSummary Treatment",
-					"type": "MRSGeneric",
-					"config": {
-						"sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/moh_222_pageSummary_treatment.sql"
-					}
-                } ,
                 {
 					"name": "PageSummary TB",
 					"type": "MRSGeneric",
