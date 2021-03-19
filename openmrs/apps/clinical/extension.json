@@ -323,7 +323,7 @@
     "extensionPointId": "org.bahmni.clinical.treatment.links",
     "type": "link",
     "label": "Open <u>Q</u>uotation",
-    "url": "http://192.168.33.14:8069/quotations/latest?patient_ref={{patient_ref}}&amp;dispensed=false&amp;location_ref={{location_ref}}",
+    "url": "http://45.33.88.190:8069/quotations/latest?patient_ref={{patient_ref}}&amp;dispensed=false&amp;location_ref={{location_ref}}",
     "shortcutKey": "q",
     "requiredPrivilege": "app:billing"
   }
