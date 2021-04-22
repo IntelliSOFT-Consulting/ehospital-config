@@ -74,6 +74,9 @@
                 "FHS": {
                     "buttonSelect": true
                 },
+                "Registered on Mtiba": {
+                    "required" : true
+                },
                 "defaults":{
                     "FHS": "Present"
                 }
