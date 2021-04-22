@@ -37,4 +37,16 @@ Bahmni.ConceptSet.FormConditions.rules = {
             }
         }     
     },
+    "Registered on Mtiba" : function (formName , formFieldValues, patient){
+        var registered = formFieldValues["Registered on Mtiba"];
+        if(registered == "True"){
+            return{
+                show: ["Mtiba Transaction Number"]
+            }
+        }else {
+            return{
+                hide: ["Mtiba Transaction Number"]
+            }
+        }     
+    },
 };
