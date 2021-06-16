@@ -68,5 +68,17 @@
         },
         "order": 2,
         "requiredPrivilege": "Edit Visits"
+    },
+    "assignVisitProvider":{
+        "id": "bahmni.registration.conceptSetGroup.mtibaIRegistration2",
+        "extensionPointId": "org.bahmni.registration.conceptSetGroup.observations",
+        "type": "config",
+        "extensionParams": {
+            "conceptName": "Provider Assignment",
+            "translationKey": "ASSIGN_VISIT_PROVIDER_KEY",
+            "required":true
+        },
+        "order": 2,
+        "requiredPrivilege": "Edit Visits"
     }
 }

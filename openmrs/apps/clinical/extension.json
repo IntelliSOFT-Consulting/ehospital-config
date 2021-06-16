@@ -106,6 +106,32 @@
     "order": 4,
     "requiredPrivilege": "app:clinical"
   },
+  "bahmniClinicalPatientsASearchMyAssignedNotSeenPatients": {
+    "id": "bahmni.clinical.patients.search.myAssignedPatientNotSeenSearch",
+    "extensionPointId": "org.bahmni.patient.search",
+    "type": "config",
+    "extensionParams": {
+      "searchHandler": "emrapi.sqlSearch.myAssignedPatientsNotSeen",
+      "translationKey": "MODULE_LABEL_ASSIGNED_NOT_SEEN",
+      "forwardUrl": "#/default/patient/{{patientUuid}}/dashboard"
+    },
+    "label": "Active",
+    "order": 3,
+    "requiredPrivilege": "app:clinical"
+  },
+  "bahmniClinicalPatientsASearchMyAssignedSeenPatients": {
+    "id": "bahmni.clinical.patients.search.myAssignedPatientsSeenSearch",
+    "extensionPointId": "org.bahmni.patient.search",
+    "type": "config",
+    "extensionParams": {
+      "searchHandler": "emrapi.sqlSearch.myAssignedPatientsSeen",
+      "translationKey": "MODULE_LABEL_ASSIGNED_SEEN",
+      "forwardUrl": "#/default/patient/{{patientUuid}}/dashboard"
+    },
+    "label": "Active",
+    "order": 3,
+    "requiredPrivilege": "app:clinical"
+  },
   "activePatientsByLocation": {
     "id": "bahmni.clinical.patients.search.activePatientsByLocation",
     "extensionPointId": "org.bahmni.patient.search",
