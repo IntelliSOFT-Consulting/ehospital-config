@@ -367,8 +367,8 @@ SELECT
 '% that met HbA1c target (< 7%)' AS 'Diagnosis' ,
 '' AS '',
 '' AS '',
-((select COUNT(o.person_id) FROM openmrs.obs o ,openmrs.concept_name cn WHERE o.concept_id = cn.concept_id AND cn.name IN ('CURRENT HbA1c(%)') AND cn.locale = 'en'AND cn.locale_preferred = 1  AND o.value_numeric < 7 AND  o.obs_datetime BETWEEN '#startDate#' AND '#endDate#') * 100 / 
-(select COUNT(o.person_id) FROM openmrs.obs o ,openmrs.concept_name cn WHERE o.concept_id = cn.concept_id AND cn.name IN ('CURRENT HbA1c(%)') AND cn.locale = 'en'AND cn.locale_preferred = 1  AND o.value_numeric IS NOT NULL AND  o.obs_datetime BETWEEN '#startDate#' AND '#endDate#') )AS Totals
+((select COUNT(o.person_id) FROM openmrs.obs o ,openmrs.concept_name cn WHERE o.concept_id = cn.concept_id AND cn.name IN ('CURRENT HbA1c(%)') AND cn.locale = 'en'AND cn.locale_preferred = 1 AND cn.concept_name_type = "FULLY_SPECIFIED" AND o.value_numeric < 7 AND  o.obs_datetime BETWEEN '#startDate#' AND '#endDate#') * 100 / 
+(select COUNT(o.person_id) FROM openmrs.obs o ,openmrs.concept_name cn WHERE o.concept_id = cn.concept_id AND cn.name IN ('CURRENT HbA1c(%)') AND cn.locale = 'en'AND cn.locale_preferred = 1  AND cn.concept_name_type = "FULLY_SPECIFIED" AND o.value_numeric IS NOT NULL AND  o.obs_datetime BETWEEN '#startDate#' AND '#endDate#') )AS Totals
 
 UNION ALL 
 
@@ -788,19 +788,19 @@ UNION ALL
      
 SELECT 'Total deaths due to diabetes complications' AS 'Diagnosis' ,
     SUM(CASE WHEN (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Final diagnosis' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 1 ' 
+    o.value_coded IN (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 1 ' 
 'Diabetes mellitus, type 2' ,'Gestational Diabetes Mellitus' ,'Diabetes secondary to other causes') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
     (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Patient status' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
     o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Deceased') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED"))
     AND p.gender = 'M' THEN 1 END)  AS 'Male'  ,
     SUM(CASE WHEN (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Final diagnosis' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 1 ' 
+    o.value_coded IN (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 1 ' 
 'Diabetes mellitus, type 2' ,'Gestational Diabetes Mellitus' ,'Diabetes secondary to other causes') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
     (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Patient status' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
     o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Deceased') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED"))
     AND p.gender = 'F' THEN 1 END)  AS 'Female'  ,
     SUM(CASE WHEN (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Final diagnosis' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 1 ' 
+    o.value_coded IN (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 1 ' 
 'Diabetes mellitus, type 2' ,'Gestational Diabetes Mellitus' ,'Diabetes secondary to other causes') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
     (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Patient status' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
     o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Deceased') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED"))
@@ -812,17 +812,17 @@ UNION ALL
      
 SELECT 'Total deaths due to hypertension complications' AS 'Diagnosis' ,
  SUM(CASE WHEN (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Final diagnosis' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Hypertension','Pre-Eclampsia') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
+    o.value_coded IN (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Hypertension','Pre-Eclampsia') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
     (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Patient status' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
     o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Deceased') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED"))
     AND p.gender = 'M' THEN 1 END)  AS 'Male'  ,
     SUM(CASE WHEN (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Final diagnosis' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Hypertension','Pre-Eclampsia') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
+    o.value_coded IN (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Hypertension','Pre-Eclampsia') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
     (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Patient status' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
     o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Deceased') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED"))
     AND p.gender = 'F' THEN 1 END)  AS 'Female'  ,
     SUM(CASE WHEN (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Final diagnosis' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Hypertension','Pre-Eclampsia') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
+    o.value_coded IN (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Hypertension','Pre-Eclampsia') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
     (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Patient status' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
     o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Deceased') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED"))
     THEN 1 END)  AS 'Total'  
