@@ -37,7 +37,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -88,7 +88,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -139,7 +139,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(WEEK, p.birthdate, o.value_datetime) <= 2
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -190,7 +190,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -242,7 +242,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -293,7 +293,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -344,7 +344,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -395,7 +395,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -446,7 +446,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -497,7 +497,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -548,7 +548,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -599,7 +599,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -650,7 +650,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -701,7 +701,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -752,7 +752,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -803,7 +803,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -854,7 +854,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -905,7 +905,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -956,7 +956,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1007,7 +1007,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1058,7 +1058,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
   c.locale = 'en' AND c.locale_preferred = 1
@@ -1109,7 +1109,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1160,7 +1160,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1211,7 +1211,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1262,7 +1262,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1314,7 +1314,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) BETWEEN 6 AND 11
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1365,7 +1365,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1416,7 +1416,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1467,7 +1467,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) < 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1518,7 +1518,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1569,7 +1569,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) = 12
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1620,7 +1620,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) BETWEEN 12 AND 59
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1671,7 +1671,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) BETWEEN 18 AND 24
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
@@ -1722,7 +1722,7 @@ SELECT
 	SUM(CASE WHEN DAY(value_datetime)IS NOT NULL THEN 1 ELSE 0 END) AS Totals
 	
 FROM openmrs.concept_name c 
-LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#'
+LEFT JOIN openmrs.obs o ON c.concept_id = o.concept_id AND o.value_datetime  BETWEEN '#startDate#' AND '#endDate#' and o.voided = 0
 LEFT JOIN openmrs.person p ON p.person_id = o.person_id AND TIMESTAMPDIFF(MONTH, p.birthdate, o.value_datetime) >= 24
 WHERE 
    c.locale = 'en' AND c.locale_preferred = 1
