@@ -57,18 +57,6 @@
         "order": 2,
         "requiredPrivilege": "Edit Visits"
     },
-    "mtibaRegistration":{
-        "id": "bahmni.registration.conceptSetGroup.mtibaIRegistration",
-        "extensionPointId": "org.bahmni.registration.conceptSetGroup.observations",
-        "type": "config",
-        "extensionParams": {
-            "conceptName": "Mtiba Registration",
-            "translationKey": "M-Tiba Registration",
-            "required":true
-        },
-        "order": 2,
-        "requiredPrivilege": "Edit Visits"
-    },
     "assignVisitProvider":{
         "id": "bahmni.registration.conceptSetGroup.mtibaIRegistration2",
         "extensionPointId": "org.bahmni.registration.conceptSetGroup.observations",
