@@ -1,663 +1,458 @@
-
-SELECT 
-'Cumulative no. of diabetes patients in care' AS 'Diagnosis' ,
- SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 1 ','Diabetes mellitus, type 2','Gestational Diabetes Mellitus','Diabetes secondary to other causes')  AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-
-
-UNION ALL 
-
-SELECT 
-'Cumulative no. of hypertension patients in care' AS 'Diagnosis' ,
- SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Hypertension', 'Pre-eclampsia')  AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL 
-
-SELECT
-'Cumulative no. of co-morbid DM+HTN patients in care' AS 'Diagnosis' ,
- SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Daily Register,Diagnosis Complications'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-
-UNION ALL 
-
-SELECT
-'No. of new diabetes cases' AS 'Diagnosis' ,
- SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('New') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'HTN Status'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL 
- 
- SELECT
-'No. of new hypertension cases' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('New') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'HTN Status'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL 
-
- SELECT 
-'First visit to clinic (DM and/or HTN)' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-      
-UNION ALL 
-
- SELECT
-'Re-visit to clinic (DM and/or HTN)' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded IS NOT NULL THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL 
-
-SELECT
-'Total no. with Type 1 Diabetes' AS 'Diagnosis' ,
-'' AS 'Totals'
-
-UNION ALL 
-
-SELECT
-'0-5 years' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 1') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-INNER JOIN openmrs.person p ON o.person_id = p.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') <= 5
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
- UNION ALL 
-
-SELECT
-'6-18 years' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 1') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-INNER JOIN openmrs.person p ON o.person_id = p.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') BETWEEN 6 AND 18
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-   
- UNION ALL 
-
-SELECT
-'19-35 years' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 1') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-INNER JOIN openmrs.person p ON o.person_id = p.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') BETWEEN 19 AND 35
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
- UNION ALL 
-
-SELECT
-'Over 36 years' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 1') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-INNER JOIN openmrs.person p ON o.person_id = p.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') >=36
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1 
-   AND c.concept_name_type = "FULLY_SPECIFIED" 
-
-UNION ALL 
-
-SELECT
-'Total no. with Type 2 Diabetes' AS 'Diagnosis' ,
-'' AS 'Totals'
-
-UNION ALL 
-
-SELECT
-'0-18 years' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 2') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-INNER JOIN openmrs.person p ON o.person_id = p.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') <= 18
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL 
-
-SELECT
-'19-35 years' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 2') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-INNER JOIN openmrs.person p ON o.person_id = p.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') BETWEEN 19 AND 35
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL 
-
-SELECT
-'36-60 years' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 2') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-INNER JOIN openmrs.person p ON o.person_id = p.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') BETWEEN 36 AND 60
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1 
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL 
-
- SELECT
-'> 60 years' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 2') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-INNER JOIN openmrs.person p ON o.person_id = p.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#')  >= 60
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1   
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-
-UNION ALL 
-
-SELECT
-'No. screened for Gestational Diabetes Mellitus' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Gestational Diabetes Mellitus') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
- 
-UNION ALL  
-
-SELECT
-'No. diagnosed for Gestational Diabetes Mellitus' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Gestational Diabetes Mellitus') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1 
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL  
-
-SELECT
-'No. of Diabetes secondary to other causes' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes secondary to other causes') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Final diagnosis'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1 
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL  
-
-SELECT
-'No. of patients on insulin' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Insulin') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Treatment'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1 
-   AND c.concept_name_type = "FULLY_SPECIFIED" 
- 
-UNION ALL  
-
-SELECT
-'No. of patients on OGLAs' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('OGLAs,Treatment Drug') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Treatment'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1  
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL  
-
-SELECT
-'No. of patients on both (Insulin and OGLAs)' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('OGLAs,Treatment Drug' ,'Insulin') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Treatment'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1  
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL  
-
-SELECT
-'No. of patients on diet and exercise only (DM and HTN)' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diet and Physical Activity Drugs') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Treatment'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1  
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL  
-
-SELECT
-'No. of patients done HbA1c' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_numeric IS NOT NULL THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'CURRENT HbA1c(%)'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1 
-   AND c.concept_name_type = "FULLY_SPECIFIED" 
-   
-UNION ALL  
-
-SELECT
-'% that met HbA1c target (< 7%)' AS 'Diagnosis' ,
-((select COUNT(o.person_id) FROM openmrs.obs o ,openmrs.concept_name cn WHERE o.concept_id = cn.concept_id AND cn.name IN ('CURRENT HbA1c(%)') AND cn.locale = 'en'AND cn.locale_preferred = 1  AND cn.concept_name_type = "FULLY_SPECIFIED" AND o.value_numeric < 7 AND  o.obs_datetime BETWEEN '#startDate#' AND '#endDate#') * 100 / 
-(select COUNT(o.person_id) FROM openmrs.obs o ,openmrs.concept_name cn WHERE o.concept_id = cn.concept_id AND cn.name IN ('CURRENT HbA1c(%)') AND cn.locale = 'en'AND cn.locale_preferred = 1   AND cn.concept_name_type = "FULLY_SPECIFIED"AND o.value_numeric IS NOT NULL AND  o.obs_datetime BETWEEN '#startDate#' AND '#endDate#') )AS Totals
-
-UNION ALL 
-
-SELECT
-'Total no. with hypertension' AS 'Diagnosis' ,
-'' AS 'Totals'
-
-UNION ALL
-
-SELECT
-'0-18 years' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('New','Known') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-INNER JOIN openmrs.person p ON o.person_id = p.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') <= 18
-   AND c.name = 'HTN Status'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1 
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL 
-
-SELECT
-'19-35 years' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('New','Known') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-INNER JOIN openmrs.person p ON o.person_id = p.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') BETWEEN 19 AND 35
-   AND c.name = 'HTN Status'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1 
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL 
-
-SELECT
-'36-60 years' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('New','Known') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-INNER JOIN openmrs.person p ON o.person_id = p.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') BETWEEN 36 AND 40
-   AND c.name = 'HTN Status'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1 
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-UNION ALL 
-
- SELECT
-'> 60 years' AS 'Diagnosis' ,
-SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('New','Known') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-INNER JOIN openmrs.person p ON o.person_id = p.person_id AND TIMESTAMPDIFF(YEAR, p.birthdate, '#startDate#') >= 60
-   AND c.name = 'HTN Status'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1  
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-   
-   
-UNION ALL   
-     
-SELECT 'No. of patients on antihypertensives' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Antihypertensives' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Treatment'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-
-UNION ALL   
-     
-SELECT 'No. of patients on antihypertensives' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Antihypertensives' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Treatment'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'No. with high BP at clinic visit (≥140/90)' AS 'Diagnosis' ,
-    SUM(CASE WHEN (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Systolic' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND o.value_numeric >140) AND 
-    (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Diastolic' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND o.value_numeric >90)
-    THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-
-UNION ALL 
-  		
+select 'Cumulative no. of diabetes patients in care' AS 'Diagnosis' , personCount as 'Total' from (
+select  count(distinct(p.person_id)) as 'personCount', pt.patient_id,  p.gender, p.birthdate, o.value_coded from person p 
+inner join patient pt on p.person_id = pt.patient_id
+left join obs o on p.person_id = o.person_id where o.concept_id = (select concept_id from concept_name where name = 'Daily Register, Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+ and o.voided = 0
+and o.obs_datetime >= '#startDate#' and  o.obs_datetime <= (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) 
+)t
+union all
+select 'Cumulative no. of hypertension patients in care' AS 'Diagnosis' , personCount as 'Total' from (
+select  count(distinct(p.person_id)) as 'personCount', pt.patient_id,  p.gender, p.birthdate, o.value_coded from person p 
+inner join patient pt on p.person_id = pt.patient_id
+left join obs o on p.person_id = o.person_id where o.concept_id = (select concept_id from concept_name where name = 'Daily Register, Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+and o.voided = 0  and o.value_coded = (select concept_id from concept_name where name = 'Hypertension,Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+and o.obs_datetime >= '#startDate#' and  o.obs_datetime <= (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) 
+)t
+union all
+select 'Cumulative no. of co-morbid DM+HTN patients in care' AS 'Diagnosis', 
+ count(distinct(pid)) as 'Total' from(
+select person_id as pid from (
+select p.person_id, pt.patient_id,  p.gender, p.birthdate, o.value_coded from person p 
+inner join patient pt on p.person_id = pt.patient_id
+left join obs o on p.person_id = o.person_id where o.concept_id = (select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+and o.voided = 0  
+and o.obs_datetime >= '#startDate#' and  o.obs_datetime <= (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) 
+)t 
+)tPatientsWithComorbites
+inner join (
+select p.person_id as prsnId , pt.patient_id,  p.gender, p.birthdate, o.value_coded, o.concept_id from person p 
+inner join patient pt on p.person_id = pt.patient_id
+left join obs o on p.person_id = o.person_id where o.concept_id = (select concept_id from concept_name where name = 'Daily Register, Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+and o.voided = 0 and o.value_coded in ((select concept_id from concept_name where name = 'Diabetes mellitus, type 1' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED'), 
+(select concept_id from concept_name where name = 'Diabetes mellitus, type 2' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+,(select concept_id from concept_name where name = 'Hypertension,Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED'))
+and o.obs_datetime >= '#startDate#' and  o.obs_datetime <= (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) 
+)tPatientWithHTNorDM on tPatientsWithComorbites.pid = tPatientWithHTNorDM.prsnId
+union all
+select 'No. of new diabetes cases' AS 'Diagnosis' , personCount as 'Total' from (
+select  count(distinct(p.person_id)) as 'personCount', pt.patient_id,  p.gender, p.birthdate, o.value_coded from person p 
+inner join patient pt on p.person_id = pt.patient_id
+left join obs o on p.person_id = o.person_id where o.concept_id = (select concept_id from concept_name where name = 'Diabetes New Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+ and o.voided = 0 and o.value_coded = (select concept_id from concept_name where name = 'TRUE' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+and o.obs_datetime >= '#startDate#' and  o.obs_datetime <= (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) 
+)t
+union all 
+select 'No. of new hypertension cases' AS 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  person_id, concept_id, obs_datetime , encounter_id , value_coded , voided from obs where concept_id =
+(select concept_id from concept_name where name = 'HTN Status' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'New' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'HTN Status' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate 
+union all
+select 				
+'First visit to clinic (DM and/or HTN)' as 'Diagnosis', count(distinct(prsnId)) as total  from (
+select p.person_id as prsnId , p.gender, p.birthdate, o.value_coded, o.concept_id from person p 
+inner join patient pt on p.person_id = pt.patient_id
+left join obs o on p.person_id = o.person_id where o.concept_id = (select concept_id from concept_name where name = 'Daily Register, Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+and o.voided = 0 and o.value_coded in ((select concept_id from concept_name where name = 'Diabetes mellitus, type 1' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED'), 
+(select concept_id from concept_name where name = 'Diabetes mellitus, type 2' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+,(select concept_id from concept_name where name = 'Hypertension,Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED'))
+and o.obs_datetime >= '#startDate#' and  o.obs_datetime <= (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  
+)tDiabettes
+inner join(
+select patient_id from (
+select patient_id, count(patient_id) as pid from (
+select patient_id ,@row_num := IF(@prev_value = patient_id,@row_num+1,1) AS row_num,@prev_value:= patient_id, date_started, date_stopped ,
+visit_id, voided from visit 
+order by patient_id
+)tVisitOne group by patient_id 
+)t where pid = 1
+)tFistVisit on tDiabettes.prsnId = tFistVisit.patient_id 
+union all 
+select 				
+'Re-visit to clinic (DM and/or HTN)' as 'Diagnosis', count(distinct(prsnId)) as total  from (
+select p.person_id as prsnId , p.gender, p.birthdate, o.value_coded, o.concept_id from person p 
+inner join patient pt on p.person_id = pt.patient_id
+left join obs o on p.person_id = o.person_id where o.concept_id = (select concept_id from concept_name where name = 'Daily Register, Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+and o.voided = 0 and o.value_coded in ((select concept_id from concept_name where name = 'Diabetes mellitus, type 1' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED'), 
+(select concept_id from concept_name where name = 'Diabetes mellitus, type 2' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+,(select concept_id from concept_name where name = 'Hypertension,Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED'))
+and o.obs_datetime >= '#startDate#' and  o.obs_datetime <= (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  
+)tDiabettes
+inner join(
+select patient_id from (
+select patient_id, count(patient_id) as pid from (
+select patient_id ,@row_num := IF(@prev_value = patient_id,@row_num+1,1) AS row_num,@prev_value:= patient_id, date_started, date_stopped ,
+visit_id, voided from visit 
+order by patient_id
+)tVisitOne group by patient_id 
+)t where pid > 1
+)tFistVisit on tDiabettes.prsnId = tFistVisit.patient_id 
+union all
+select "" as Diagnosis, "" as Total
+union all 
+select "Total no. with Type 1 Diabetes" as Diagnosis, "" as Total
+union all
+select '0-5 years', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Diabetes mellitus, type 1' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') < 5
+union all
+select '6-18 years', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Diabetes mellitus, type 1' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') >= 6 and TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') <= 18
+union all
+select '19-35 years', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Diabetes mellitus, type 1' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') >= 19 and TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') <= 35
+union all
+select 'Over 36', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Diabetes mellitus, type 1' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') >= 36
+union all
+select "" as Diagnosis, "" as Total
+union all 
+select "Total no. with Type 2 Diabetes" as Diagnosis, "" as Total
+union all
+select '0-18 years', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Diabetes mellitus, type 2' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') <= 18
+union all 
+select '19-35 years', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Diabetes mellitus, type 2' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') >= 19 and TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') <= 35
+union all 
+select '36-60 years', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Diabetes mellitus, type 2' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') >= 36 and TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') <= 60
+union all
+select '> 60 years', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Diabetes mellitus, type 2' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') >= 60 
+union all
+select 'No. screened for Gestational Diabetes Mellitus' AS 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  person_id, concept_id, obs_datetime , encounter_id , value_coded , voided from obs where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Gestational Diabetes Mellitus' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate 
+union all 
+select 'No. diagnosed for Gestational Diabetes Mellitus' AS 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  person_id, concept_id, obs_datetime , encounter_id , value_coded , voided from obs where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Gestational Diabetes Mellitus' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate 
+union all
+select 'No. of Diabetes secondary to other causes' AS 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  person_id, concept_id, obs_datetime , encounter_id , value_coded , voided from obs where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Diabetes secondary to other causes' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate 
+union all
+select 'No. of patients on insulin', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Treatment Drugs' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Insulin' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Treatment Drugs' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate 
+union all
+select 'No. of patients on OGLAs', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Treatment Drugs' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'OGLAs,Treatment Drug' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Treatment Drugs' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate 
+union all
+select 'No. of patients on diet and exercise only (DM and HTN)' as 'Diagnosis', count(distinct(person_id)) as 'Total' from (
+select person_id from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Treatment Drugs' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Diet and Physical Activity Drugs' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Treatment Drugs' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate 
+)tDietAndTreatment inner join(
+select pid from(
+select person_id as pid from (
+select p.person_id, pt.patient_id,  p.gender, p.birthdate, o.value_coded from person p 
+inner join patient pt on p.person_id = pt.patient_id
+left join obs o on p.person_id = o.person_id where o.concept_id = (select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+and o.voided = 0  
+and o.obs_datetime >= '#startDate#' and  o.obs_datetime <= (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) 
+)t 
+)tPatientsWithComorbites
+inner join (
+select p.person_id as prsnId , pt.patient_id,  p.gender, p.birthdate, o.value_coded, o.concept_id from person p 
+inner join patient pt on p.person_id = pt.patient_id
+left join obs o on p.person_id = o.person_id where o.concept_id = (select concept_id from concept_name where name = 'Daily Register, Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+and o.voided = 0 and o.value_coded in ((select concept_id from concept_name where name = 'Diabetes mellitus, type 1' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED'), 
+(select concept_id from concept_name where name = 'Diabetes mellitus, type 2' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED')
+,(select concept_id from concept_name where name = 'Hypertension,Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED'))
+and o.obs_datetime >= '#startDate#' and  o.obs_datetime <= (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) 
+)tPatientWithHTNorDM on tPatientsWithComorbites.pid = tPatientWithHTNorDM.prsnId
+)tHTNandDM on tDietAndTreatment.person_id = tHTNandDM.pid 
+union all
+select 'No. of patients done HbA1c' as 'Diagnosis' , count(distinct(person_id)) as 'Total' from (
+select  person_id, concept_id, obs_datetime , encounter_id , value_numeric , voided from obs where concept_id =
+(select concept_id from concept_name where name ='CURRENT HbA1c(%)' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) and voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name ='CURRENT HbA1c(%)' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate 
+union all 
+select '% that met HbA1c target (< 7%)' as 'Diagnosis' , count(distinct(person_id)) as 'Total' from (
+select  person_id, concept_id, obs_datetime , encounter_id , value_numeric , voided from obs where concept_id =
+(select concept_id from concept_name where name ='CURRENT HbA1c(%)' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) and voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name ='CURRENT HbA1c(%)' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where value_numeric < 7
+union all
+select "" as Diagnosis , "" as "Total"
+union all 
+select "Total no. with hypertension" as Diagnosis , "" as "Total"
+union all
+select '0-18 years', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Hypertension,Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') <= 18
+union all
+ select '19-35 years', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Hypertension,Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') >= 19 and TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') <= 35
+union all 
+select '36-60 years', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Hypertension,Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') >= 36 and TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') <= 60
+union all
+select '> 60 years', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Hypertension,Diagnosis' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Diagnosis' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate where TIMESTAMPDIFF(YEAR,birthdate,'#endDate#') >= 60
+union all
+ select 'No. of patients on antihypertensives', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register, Treatment Drugs' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Anti-hypertensives Drugs' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register, Treatment Drugs' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate 
+union all
+select 'No. with high BP at clinic visit (≥140/90)', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_numeric , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Blood pressure (mmHg)' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Blood pressure (mmHg)' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate and value_numeric >= 140 
+union all
 SELECT
 'Total no. of patients with CVD (new diagnosis)' AS 'Diagnosis' ,
 '' AS 'Totals'
+union all
+select 'Stroke' as 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Stroke' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate
+union all
+select 'Ischemic heart disease' as 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Ischemic heart disease' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate
+union all
+select 'Peripheral vascular disease' as 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Peripheral vascular disease' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate
+union all
+select 'Heart failure' as 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Heart failure' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate
+     
 
-UNION ALL   
-     
-SELECT 'Stroke' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Stroke' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Daily Register,Diagnosis Complications'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-
-UNION ALL   
-     
-SELECT 'Ischemic heart disease' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Ischemic heart disease' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Daily Register,Diagnosis Complications'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-
-UNION ALL   
-     
-SELECT 'Peripheral vascular/artery disease' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Peripheral vascular disease' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Daily Register,Diagnosis Complications'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'Heart failure' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Heart failure' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Daily Register,Diagnosis Complications'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'No. of Patients with neuropathies (new diagnosis)' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Peripheral Neuropathy',
-'Nephropathy') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Daily Register,Diagnosis Complications'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'No. of patients screened for diabetic foot' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetic foot') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Daily Register,Diagnosis Complications'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'No. of patients with diabetic foot ulcer (new diagnosis)' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetic foot') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Daily Register,Diagnosis Complications'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'No. of feet saved through treatment' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Surgical debridement') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Footcare outcome'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'No. of Amputation due to diabetic foot' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Amputation') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Footcare outcome'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'No. with kidney complications (new diagnosis)' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = ''
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'No. with diabetic retinopathy (new diagnosis)' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = ''
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'No. Screened for Tuberculosis' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'TRUE' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Diabetes, Screend For TB'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'No. Screened Positive for Tuberclosis' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'POSTIVE' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Diabetes, TB Status after Screening'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'Total admitted' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Admitted' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Footcare outcome'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'No. admitted with DKA' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Admitted' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Footcare outcome'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-   AND c.concept_name_type = "FULLY_SPECIFIED"
-	
-UNION ALL   
-     
-SELECT 'No. admitted with Hypoglycemia' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Admitted' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'Footcare outcome'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-   AND c.concept_name_type = "FULLY_SPECIFIED"	
-	
-	
-UNION ALL   
-     
-SELECT 'No. admitted with stroke' AS 'Diagnosis' ,
-     SUM(CASE WHEN (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Daily Register,Diagnosis Complications' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Stroke') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
-    (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Footcare outcome' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Admitted') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED"))
-    THEN 1 END)  AS 'Total'  
-FROM openmrs.obs o 	
-	
-UNION ALL   
-     
-SELECT 'No. admitted with heart failure' AS 'Diagnosis' ,
-     SUM(CASE WHEN (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Daily Register,Diagnosis Complications' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Heart failure') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
-    (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Footcare outcome' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Admitted') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED"))
-    THEN 1 END)  AS 'Total'  
-FROM openmrs.obs o 		
-	
-UNION ALL   
-     
-SELECT 'No. admitted with ischemic heart disease' AS 'Diagnosis' ,
-   SUM(CASE WHEN (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Daily Register,Diagnosis Complications' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Ischemic heart disease') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
-    (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Footcare outcome' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Admitted') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED"))
-    THEN 1 END)  AS 'Total'  
-FROM openmrs.obs o 		
-	
-UNION ALL   
-     
-SELECT 'No. admitted with hypertension urgency/emergency' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Admitted')AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name IN ('Footcare outcome')
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1	
-	
-UNION ALL   
-     
-SELECT 'Total deaths due to diabetes complications' AS 'Diagnosis' ,
-    SUM(CASE WHEN (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Final diagnosis' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded IN (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Diabetes mellitus, type 1 ' 
-'Diabetes mellitus, type 2' ,'Gestational Diabetes Mellitus' ,'Diabetes secondary to other causes') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
-    (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Patient status' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Deceased') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED"))
-    THEN 1 END)  AS 'Total'  
-FROM openmrs.obs o 		
-
-UNION ALL   
-     
-SELECT 'Total deaths due to hypertension complications' AS 'Diagnosis' ,
-    SUM(CASE WHEN (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Final diagnosis' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded IN (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Hypertension','Pre-Eclampsia') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED")) AND
-    (o.concept_id = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'Patient status' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") AND 
-    o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name IN ('Deceased') AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED"))
-    THEN 1 END)  AS 'Total'  
-FROM openmrs.obs o 	
-
-UNION ALL   
-     
-SELECT 'No. enrolled with NHIF' AS 'Diagnosis' ,
-    SUM(CASE WHEN o.value_coded = (SELECT c.concept_id FROM openmrs.concept_name c WHERE c.name = 'TRUE' AND c.locale = 'en' AND c.concept_name_type = "FULLY_SPECIFIED") THEN 1 END)  AS 'Total'        
-FROM openmrs.obs o 
-INNER JOIN openmrs.concept_name c ON o.concept_id = c.concept_id
-   AND c.name = 'National Health Insurance Fund Member'
-	AND o.obs_datetime BETWEEN '#startDate#' AND '#endDate#'
-	AND locale = 'en' AND c.locale_preferred = 1
-   AND c.concept_name_type = "FULLY_SPECIFIED";
-		
-	
-	
-	
-   
-   
-  
-   
 
 
 
