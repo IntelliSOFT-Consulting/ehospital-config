@@ -451,7 +451,75 @@ value_coded = (select concept_id from concept_name where name = 'Heart failure' 
 (select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
 and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
 a.person_id = c.pid and a.encounter_id = c.maxdate
-     
+union all
+select 'No. of Patients with neuropathies (new diagnosis)' as 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Nephropathy' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate
+union all
+select 'No. of patients screened for diabetic foot' as 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Diabetic foot' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate
+union all
+select 'No. of patients with diabetic foot ulcer (new diagnosis)' as 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Diabetic foot' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate
+union all
+select 'No. of feet saved through treatment' as 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Footcare outcome' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Ulcer Healed' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Footcare outcome' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate
+union all
+select 'No. of Amputation due to diabetic foot' as 'Diagnosis' , null as 'Total'
+union all
+select 'No. with kidney complications (new diagnosis)' as 'Diagnosis' , null as 'Total'
+union all
+select 'No. of patients with diabetic foot ulcer (new diagnosis)' as 'Diagnosis', count(distinct(person_id)) as 'Total'
+from (
+select  obs.person_id, obs.concept_id, obs_datetime , obs.encounter_id , value_coded , obs.voided, p.birthdate from obs 
+left join person p on obs.person_id = p.person_id 
+where concept_id =
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59'))  and 
+value_coded = (select concept_id from concept_name where name = 'Retinopathy' and voided = 0 and concept_name_type = 'FULLY_SPECIFIED') and obs.voided = 0
+)a inner join (select person_id as pid , concept_id as cid, max(encounter_id) maxdate from obs where concept_id = 
+(select concept_id from concept_name where name = 'Daily Register,Diagnosis Complications' and concept_name_type = 'FULLY_SPECIFIED' and voided = 0) 
+and obs_datetime  between DATE_FORMAT('#startDate#','%Y-%m-01') and (DATE_FORMAT(('#endDate#'),'%Y-%m-%d 23:59:59')) group by pid) c on 
+a.person_id = c.pid and a.encounter_id = c.maxdate
 
 
 
